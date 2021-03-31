@@ -1,0 +1,7 @@
+{
+  "BASE_URL": "https://reqres.in/api/",
+  "createUser": "users",
+  "usersList": "users?page={id}",
+  "updateUser": "users/{id}",
+  "deleteUser": "users/{id}"
+}

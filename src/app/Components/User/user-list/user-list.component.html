@@ -1,0 +1,73 @@
+<div class="container-fluid">
+
+    <div class="col-12" style="text-align: center;">
+
+        <div class="row">
+            <div>
+                <button mat-raised-button style="float: right; margin: 5px 5% 5px 5px;" color="faded-blue"
+                    (click)="redirectToCreateUser()"><span class="material-icons">person_add</span>Create User</button>
+            </div>
+
+        </div>
+        <mat-divider></mat-divider>
+        <div class="row">
+            <div class="padTop" style="text-align: center;">
+                <table class="usersTable" mat-table [dataSource]="users" class="mat-elevation-z8">
+
+                    <ng-container matColumnDef="fname">
+                        <th mat-header-cell *matHeaderCellDef> First name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="lname">
+                        <th mat-header-cell *matHeaderCellDef> Last name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef> Email </th>
+                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="avatar">
+                        <th mat-header-cell *matHeaderCellDef> Avatar </th>
+                        <td mat-cell *matCellDef="let element">
+                            <img class="userAvatar" [src]="element.avatar" alt="avatar" mat-card-avatar />
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="view">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element">
+                            <i class="material-icons viewIcon actionIcon">remove_red_eye</i>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="edit">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element">
+                            <i (click)="redirectToUpdateUser(element)" class="material-icons actionIcon editIcon">edit</i>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element">
+                            <i (click)="deleteUser(element)" class="material-icons actionIcon delIcon">delete</i>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+
+        </div>
+
+        <mat-paginator [length]="length" [showFirstLastButtons]="true" [pageSize]="pageSize"
+            (page)="pEvent = $event;  getPaginatedUserList(pEvent);">
+        </mat-paginator>
+
+    </div>
+
+
+
+</div>

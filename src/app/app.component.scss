@@ -1,0 +1,19 @@
+.nav-grey
+{
+    background: #151515;
+    color: rgb(202, 202, 202);
+    transition: 0.5s;
+}
+.navToggler
+{
+    color: rgb(185, 185, 185);
+    float: right;
+    cursor: pointer;
+}
+.navToggler:hover{
+    color: rgb(255, 255, 255);
+}
+.sidenav-container
+{
+    transition: 0.5s;
+}
