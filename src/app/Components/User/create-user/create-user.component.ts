@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/Services/ApiService/api.service';
 import Swal from 'sweetalert2';
@@ -23,7 +23,8 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<CreateUserComponent>,
-    private apiService: ApiService
+    private apiService: ApiService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +39,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     this.userform = this.fb.group({
 
       name: [null, [Validators.pattern('^[a-zA-Z]+$'), Validators.required]],
-      job: [null, [Validators.pattern('^[a-zA-Z]+$'), Validators.required]]
+      job: [null, [Validators.pattern('^[a-z A-Z]+$'), Validators.required]]
 
     });
   }

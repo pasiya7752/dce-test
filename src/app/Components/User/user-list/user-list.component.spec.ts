@@ -1,4 +1,10 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UserListComponent } from './user-list.component';
 
@@ -8,7 +14,15 @@ describe('UserListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UserListComponent]
+      declarations: [UserListComponent],
+      imports: [
+        MatDialogModule,
+        MatDividerModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatPaginatorModule,
+        MatTableModule
+      ]
     })
       .compileComponents();
   });
@@ -21,22 +35,6 @@ describe('UserListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('get users httpResponse status must be equal to 200', async () => {
-    const pageId = 1;
-    component.getUsersList(pageId).then(status => {
-      expect(status).toEqual(200);
-    });
-  });
-
-  it('delete user httpResponse status must be equal to 204', async () => {
-    const userElement = {
-      id: 2
-    };
-    component.deleteUser(userElement).then(status => {
-      expect(status).toEqual(204);
-    });
   });
 
 });

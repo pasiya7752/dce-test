@@ -49,7 +49,8 @@ import { UpdateUserComponent } from './Components/User/update-user/update-user.c
     MatIconModule,
     MatToolbarModule,
     FlexLayoutModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatInputModule
 
   ],
   providers: [],

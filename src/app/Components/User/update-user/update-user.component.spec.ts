@@ -1,7 +1,13 @@
+import { HttpClientModule } from '@angular/common/http';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { BrowserModule, By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UpdateUserComponent } from './update-user.component';
 
@@ -9,7 +15,8 @@ describe('UpdateUserComponent', () => {
   let component: UpdateUserComponent;
   let fixture: ComponentFixture<UpdateUserComponent>;
   let debug: DebugElement;
-  let html: HTMLElement;
+  let dialog: MatDialog;
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,8 +26,15 @@ describe('UpdateUserComponent', () => {
       imports: [
         BrowserModule,
         FormsModule,
-        ReactiveFormsModule
-      ]
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        HttpClientModule,
+        MatDividerModule,
+        BrowserAnimationsModule
+      ],
+      providers: [{ provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: dialog }]
     })
       .compileComponents();
   });
@@ -28,8 +42,8 @@ describe('UpdateUserComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UpdateUserComponent);
     component = fixture.componentInstance;
+    dialog = TestBed.inject(MatDialog);
     debug = fixture.debugElement.query(By.css('update-user'));
-    html = debug.nativeElement;
     fixture.detectChanges();
   });
 
@@ -46,7 +60,7 @@ describe('UpdateUserComponent', () => {
     expect(component.userform.valid).toBeFalsy();
   });
 
-  it('form should be invalid', async () => {
+  it('form should be valid', async () => {
     component.userform.controls['firstname'].setValue('David');
     component.userform.controls['lastname'].setValue('Michell');
     component.userform.controls['email'].setValue('david.michel@gmail.com');
@@ -54,15 +68,6 @@ describe('UpdateUserComponent', () => {
     expect(component.userform.valid).toBeTruthy();
   });
 
-  it('user update httpResponse status must be equal to 200', async () => {
-    const testUserData = {
-      name: 'testName',
-      job: 'testJob'
-    };
-    component.updateUser(testUserData).then(status => {
-      expect(status).toEqual(200);
-    });
-  });
 
   it('save button should be kept disabled until the form is valid', async () => {
     if (component.userform.valid) {

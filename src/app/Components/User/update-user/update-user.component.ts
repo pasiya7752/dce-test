@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { UserVM } from 'src/app/Models/User/userVM';
 import { ApiService } from 'src/app/Services/ApiService/api.service';
@@ -28,6 +28,7 @@ export class UpdateUserComponent implements OnInit, OnDestroy {
     public dialogRef: MatDialogRef<UpdateUserComponent>,
     private apiService: ApiService,
     private broadcastService: BroadcastService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {
